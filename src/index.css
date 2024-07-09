@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 * {
   margin: 0;
   border: 0;
@@ -17,7 +18,7 @@
 
 body {
   background-color: var(--Slate100--);
-  font-family: "Plus Jakarta Sans";
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .layout {
@@ -27,7 +28,6 @@ body {
   transform: translate(-50%, -50%);
   max-width: 950px;
   height: auto;
-
   border-radius: 5px;
 }
 
@@ -390,4 +390,46 @@ input:focus {
 .term-result > p {
   color: var(--Slate500--);
   font-size: 0.9rem;
+}
+
+/* mobile-responsiveness for tablets */
+@media screen and (max-width: 900px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .me {
+    margin-bottom: 2rem;
+  }
+}
+
+/* mobile-responsiveness for phones */
+
+@media screen and (max-width: 850px) {
+  .layout {
+    height: 600px;
+    max-width: 350px;
+  }
+
+  .section-two-input-two {
+    flex-direction: column;
+  }
+
+  .empty-section {
+    width: 100%;
+    border-bottom-left-radius: initial;
+  }
+
+  .results {
+    width: 100%;
+    border-bottom-left-radius: initial;
+  }
+
+  .results-box {
+    width: 250px;
+  }
+
+  .me {
+    margin-bottom: 2rem;
+  }
 }

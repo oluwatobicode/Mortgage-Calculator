@@ -26,7 +26,7 @@ const Calculator = () => {
           <div className="section-two-input-one">
             <h3>Mortgage Amount</h3>
             <div className="mortgage-amount-input">
-              <div className="pounds-icon">￡</div>
+              <div className="pounds-icon">£</div>
               <input
                 value={amount}
                 onChange={(e) =>
@@ -89,6 +89,7 @@ const Calculator = () => {
                   className="mortgage_select "
                   onClick={(e) => {
                     e.preventDefault();
+
                     dispatch({
                       type: "mortgageType",
                       payLoad: el,

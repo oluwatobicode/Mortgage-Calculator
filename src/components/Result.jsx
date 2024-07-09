@@ -1,7 +1,8 @@
 import { useMort } from "../contexts/useMortgage";
 
 const Results = () => {
-  const { result } = useMort();
+  const { result, total } = useMort();
+
   if (result === null)
     return (
       <div className="empty-section">
@@ -30,11 +31,21 @@ const Results = () => {
       <div className="results-box">
         <div className="monthly-result">
           <p>Your monthly repayments</p>
-          <h1>￡{result}</h1>
+          <h1>
+            {Intl.NumberFormat("en-GB", {
+              style: "currency",
+              currency: "GBP",
+            }).format(result)}
+          </h1>
         </div>
         <div className="term-result">
           <p> Total you&apos;ll repay over the term</p>
-          <h2>￡300</h2>
+          <h2>
+            {Intl.NumberFormat("en-GB", {
+              style: "currency",
+              currency: "GBP",
+            }).format(total)}
+          </h2>
         </div>
       </div>
     </div>

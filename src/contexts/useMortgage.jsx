@@ -2,13 +2,15 @@
 import { useContext, createContext, useReducer } from "react";
 
 // initial state for the object
+
 const initialState = {
-  result: null,
   amount: "",
   interest: "",
   term: "",
   selected: null,
   type: null,
+  result: null,
+  total: null,
 };
 
 // dispatch function
@@ -23,14 +25,31 @@ function reducer(state, action) {
     case "mortgageType":
       return { ...state, type: action.payLoad, selected: action.chosen };
     case "calculate":
-      return { ...state, result: 23 };
+      return {
+        ...state,
+        result:
+          state.type === "Repayment"
+            ? (parseInt(state.amount) *
+                (parseFloat(state.interest) / 100 / 12)) /
+              (1 -
+                (1 + parseFloat(state.interest / 100) / 12) **
+                  -(12 * parseFloat(state.term)))
+            : parseInt(state.amount) * (parseFloat(state.interest) / 100 / 12),
+        total:
+          state.type === "Repayment"
+            ? parseFloat(state.result) * (12 * parseInt(state.term))
+            : parseFloat(state.result) * (12 * parseInt(state.term)) +
+              parseInt(state.amount),
+      };
+
     case "clear":
       return {
-        result: null,
         amount: "",
         interest: "",
         term: "",
         type: null,
+        result: null,
+        total: null,
       };
     default:
       throw new Error("action not recognized!");
@@ -41,20 +60,21 @@ function reducer(state, action) {
 const mortgage = createContext();
 
 const MortgageProvider = ({ children }) => {
-  const [{ result, type, term, amount, interest, selected }, dispatch] =
+  const [{ type, term, amount, interest, selected, result, total }, dispatch] =
     useReducer(reducer, initialState);
 
   return (
     <div>
       <mortgage.Provider
         value={{
-          result,
           type,
           dispatch,
           amount,
           term,
           interest,
           selected,
+          result,
+          total,
         }}
       >
         {children}
