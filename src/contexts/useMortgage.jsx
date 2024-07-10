@@ -7,8 +7,9 @@ const initialState = {
   amount: "",
   interest: "",
   term: "",
+  error: "",
   selected: null,
-  type: null,
+  type: "",
   result: null,
   total: null,
 };
@@ -24,9 +25,12 @@ function reducer(state, action) {
       return { ...state, interest: action.payLoad };
     case "mortgageType":
       return { ...state, type: action.payLoad, selected: action.chosen };
+    case "noInput":
+      return { ...state, error: action.payLoad };
     case "calculate":
       return {
         ...state,
+        error: action.payLoad,
         result:
           state.type === "Repayment"
             ? (parseInt(state.amount) *
@@ -47,6 +51,7 @@ function reducer(state, action) {
         amount: "",
         interest: "",
         term: "",
+        error: "",
         type: null,
         result: null,
         total: null,
@@ -60,8 +65,10 @@ function reducer(state, action) {
 const mortgage = createContext();
 
 const MortgageProvider = ({ children }) => {
-  const [{ type, term, amount, interest, selected, result, total }, dispatch] =
-    useReducer(reducer, initialState);
+  const [
+    { type, term, amount, interest, selected, result, total, error },
+    dispatch,
+  ] = useReducer(reducer, initialState);
 
   return (
     <div>
@@ -75,6 +82,7 @@ const MortgageProvider = ({ children }) => {
           selected,
           result,
           total,
+          error,
         }}
       >
         {children}

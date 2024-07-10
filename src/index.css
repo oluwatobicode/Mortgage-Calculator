@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 * {
   margin: 0;
   border: 0;
@@ -145,6 +146,10 @@ input:focus {
   border-radius: 5px;
 }
 
+/* .mortgage_input:focus {
+  border: 2px solid var(--lime--);
+} */
+
 .mortgage_input {
   width: 200px;
   height: 45px;
@@ -153,6 +158,10 @@ input:focus {
   font-weight: 500;
   border-radius: 5px;
 }
+
+/* .mortgage_input:focus {
+  border: 2px solid var(--lime--);
+} */
 
 .mortgage-icon {
   position: absolute;
@@ -432,4 +441,42 @@ input:focus {
   .me {
     margin-bottom: 2rem;
   }
+}
+
+/* form validation errors */
+
+.error {
+  margin-top: 0.5rem;
+  color: var(--Red--);
+}
+
+.error-icon {
+  background-color: var(--Red--);
+  position: absolute;
+  width: 55px;
+  height: 45px;
+  display: grid;
+  place-items: center;
+  right: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  color: var(--White--);
+  font-weight: 600;
+}
+
+.error-icon-pounds {
+  width: 50px;
+  height: 40px;
+  background-color: var(--Red--);
+  display: grid;
+  place-items: center;
+  position: absolute;
+  left: 0px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  color: var(--White--);
+}
+
+.error-input {
+  border: 2px solid var(--Red--);
 }
