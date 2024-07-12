@@ -111,7 +111,6 @@ const Calculator = () => {
                       className={`${index === selected ? `active` : ""}`}
                     ></span>
                   </span>
-
                   <p>{el}</p>
                 </button>
               ))}
@@ -123,7 +122,12 @@ const Calculator = () => {
             className="calculate"
             onClick={(e) => {
               e.preventDefault();
-              !interest || !amount || !term || !type
+              !interest ||
+              !amount ||
+              !term ||
+              (!type && isNaN(interest)) ||
+              isNaN(term) ||
+              isNaN(amount)
                 ? dispatch({
                     type: "noInput",
                     payLoad: "This field is required!",

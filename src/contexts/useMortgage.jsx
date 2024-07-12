@@ -27,24 +27,29 @@ function reducer(state, action) {
       return { ...state, type: action.payLoad, selected: action.chosen };
     case "noInput":
       return { ...state, error: action.payLoad };
-    case "calculate":
+    case "calculate": {
+      let mortgageResult =
+        state.type === "Repayment"
+          ? (parseInt(state.amount) * (parseFloat(state.interest) / 100 / 12)) /
+            (1 -
+              (1 + parseFloat(state.interest / 100) / 12) **
+                -(12 * parseFloat(state.term)))
+          : parseInt(state.amount) * (parseFloat(state.interest) / 100 / 12);
+
+      let mortgageTotal =
+        state.type === "Repayment"
+          ? parseFloat(mortgageResult) * (12 * parseInt(state.term))
+          : parseFloat(mortgageResult) * (12 * parseInt(state.term)) +
+            parseInt(state.amount);
+
       return {
         ...state,
+
         error: action.payLoad,
-        result:
-          state.type === "Repayment"
-            ? (parseInt(state.amount) *
-                (parseFloat(state.interest) / 100 / 12)) /
-              (1 -
-                (1 + parseFloat(state.interest / 100) / 12) **
-                  -(12 * parseFloat(state.term)))
-            : parseInt(state.amount) * (parseFloat(state.interest) / 100 / 12),
-        total:
-          state.type === "Repayment"
-            ? parseFloat(state.result) * (12 * parseInt(state.term))
-            : parseFloat(state.result) * (12 * parseInt(state.term)) +
-              parseInt(state.amount),
+        result: mortgageResult,
+        total: mortgageTotal,
       };
+    }
 
     case "clear":
       return {

@@ -3,6 +3,10 @@ import { useMort } from "../contexts/useMortgage";
 const Results = () => {
   const { result, total } = useMort();
 
+  {
+    console.log(result, total);
+  }
+
   if (result === null || isNaN(result))
     return (
       <div className="empty-section">
